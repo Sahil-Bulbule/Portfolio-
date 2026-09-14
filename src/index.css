@@ -1,0 +1,520 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface-page: #000000;
+  --surface-parent: #181818;
+  --surface-child: #222222;
+  --surface-child-hover: #292929;
+  --text-primary: #F5F5F5;
+  --text-secondary: #CCCCCC;
+  --text-muted: #A3A3A3;
+  --accent-silver: #BFC3C7;
+  --accent-red: #C8C8C8;
+}
+
+/* ─── Global Reset & Base Setup ─────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #000000;
+  color: #F2F2F2;
+}
+
+body {
+  background-color: #000000;
+  color: #F2F2F2;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ambient-surface::before,
+.ambient-surface::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambient-surface::before {
+  inset: 0;
+  opacity: 0.22;
+  background-image: radial-gradient(circle at 15% 20%, rgba(200, 200, 200, 0.12) 0 1px, transparent 1.5px), radial-gradient(circle at 80% 35%, rgba(191, 195, 199, 0.10) 0 1px, transparent 1.5px);
+  background-size: 180px 180px, 240px 240px;
+  animation: ambientDrift 24s linear infinite;
+}
+
+.ambient-surface::after {
+  width: 28rem;
+  height: 18rem;
+  top: 8%;
+  left: 50%;
+  background: radial-gradient(ellipse, rgba(200, 200, 200, 0.08), transparent 68%);
+  filter: blur(24px);
+  transform: translateX(-50%);
+  animation: ambientPulse 9s ease-in-out infinite;
+}
+
+@keyframes ambientDrift {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 180px 90px, -240px 120px; }
+}
+
+@keyframes ambientPulse {
+  0%, 100% { opacity: 0.45; transform: translateX(-50%) scale(0.96); }
+  50% { opacity: 0.8; transform: translateX(-50%) scale(1.04); }
+}
+
+.ambient-surface > * {
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, h3, h4, .font-display {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.025em;
+  color: #E8E8E8;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* ─── Selection Highlights (#BFC3C7 & #000000) ──────────────────── */
+::selection {
+  background: #BFC3C7;
+  color: #000000;
+}
+
+/* ─── Custom Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+::-webkit-scrollbar-thumb {
+  background: #252525;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #B8B8B8;
+}
+
+/* ─── PARENT SECTION CARDS ─────────────────────────────────────────
+ * Background: #181818 (refined lighter charcoal tone)
+ * Border: rgba(255, 255, 255, 0.16)
+ * Very subtle white/grey shadow
+ ─────────────────────────────────────────────────────────────────── */
+.card-outer {
+  background-color: #181818;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 1.25rem; /* 20px clean, not toy-like */
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.85), 0 0 20px -5px rgba(255, 255, 255, 0.04);
+  position: relative;
+  overflow: hidden;
+  transition: all 200ms ease-out;
+}
+
+/* A small orbiting segment gives parent cards the same perimeter language as child cards. */
+.card-outer::after,
+.card-inner::after {
+  content: "";
+  position: absolute;
+  z-index: 18;
+  width: 32px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #FFFFFF, #BFC3C7, transparent);
+  box-shadow: 0 0 5px rgba(191, 195, 199, 0.32);
+  opacity: 0;
+  pointer-events: none;
+  offset-path: inset(0 round 20px);
+  offset-distance: 0%;
+}
+
+@keyframes perimeterOrbit {
+  0% { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+
+.card-outer:hover::after,
+.card-inner:hover::after {
+  opacity: 0.9;
+  animation: perimeterOrbit 0.95s linear infinite;
+}
+
+.card-outer:hover {
+  background-color: #1b1b1b;
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 20px 45px -8px rgba(0, 0, 0, 0.9), 0 0 25px -4px rgba(255, 255, 255, 0.06);
+}
+
+/* ─── CHILD / INNER CARDS ──────────────────────────────────────────
+ * Background: #222222 (sleek step-up contrast inside parent cards)
+ * Alternative / slightly lighter: #252525
+ * Border: rgba(255, 255, 255, 0.12)
+ * On hover: #292929, translateY(-2px), scale(1.01), subtle shadow
+ ─────────────────────────────────────────────────────────────────── */
+.card-inner {
+  background-color: #222222;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 0.875rem; /* 14px */
+  position: relative;
+  overflow: hidden;
+  transition: background-color 180ms ease-out, transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out;
+}
+
+.card-inner:hover {
+  transform: translateY(-2px) scale(1.01);
+  background-color: #292929;
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55), 0 2px 10px rgba(255, 255, 255, 0.05);
+}
+
+.developer-sub-card {
+  position: relative;
+  overflow: hidden;
+  background: #202020;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  transition: background-color 200ms ease-out, border-color 200ms ease-out, transform 200ms ease-out, box-shadow 200ms ease-out;
+}
+
+.developer-sub-card::after {
+  content: "";
+  position: absolute;
+  z-index: 12;
+  width: 34px;
+  height: 1px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #FFFFFF, #BFC3C7, transparent);
+  box-shadow: 0 0 5px rgba(191, 195, 199, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  offset-path: inset(0 round 12px);
+  offset-distance: 0%;
+}
+
+.developer-sub-card:hover {
+  background: #272727;
+  border-color: rgba(255, 255, 255, 0.30);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.developer-sub-card:hover::after {
+  opacity: 0.95;
+  animation: perimeterOrbit 1s linear infinite;
+}
+
+/* Compatibility surface for the older sections that use the glass utility. */
+.glass {
+  background: #202020;
+  border-color: rgba(255, 255, 255, 0.12);
+  transition: background-color 180ms ease-out, transform 180ms ease-out, box-shadow 180ms ease-out, border-color 180ms ease-out;
+}
+
+.glass:hover {
+  background: #272727;
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.55);
+}
+
+/* Consistent section heading marker and restrained symbol motion. */
+section h2.font-display::before {
+  content: "●";
+  display: inline-block;
+  margin-right: 0.55rem;
+  color: var(--accent-red);
+  font-size: 0.42em;
+  vertical-align: 0.28em;
+  animation: symbolPulse 1.8s ease-in-out infinite;
+}
+
+/* Kicker labels stay available as context, but no longer read as colored pills. */
+section [class*="tracking-widest"][class*="uppercase"][class*="rounded-full"] {
+  background: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  border-radius: 0 !important;
+}
+
+@keyframes symbolPulse {
+  0%, 100% { opacity: 0.65; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+section .card-inner svg:not([class*="absolute"]):not(button svg):not(.btn-primary svg):not(.music-play-btn svg),
+section .card-outer svg:not([class*="absolute"]):not(button svg):not(.btn-primary svg):not(.music-play-btn svg) {
+  color: var(--accent-red);
+  transition: color 180ms ease-out, transform 180ms ease-out;
+}
+
+section .card-inner:hover svg:not([class*="absolute"]):not(button svg):not(.btn-primary svg):not(.music-play-btn svg),
+section .card-outer:hover svg:not([class*="absolute"]):not(button svg):not(.btn-primary svg):not(.music-play-btn svg) {
+  color: var(--accent-red);
+  transform: scale(1.04);
+}
+
+/* Alternative slightly lighter child card */
+.card-inner-alt {
+  background-color: #252525;
+}
+
+/* ─── FAST TRAVELLING PERIMETER HOVER LINE ANIMATION ───────────────
+ * Starts at ONE fixed point (0 on stroke-dashoffset).
+ * Travels around full perimeter (100) and returns to exact same point.
+ * Loops continuously in 0.95s (between 0.8s - 1.2s fast loop).
+ ─────────────────────────────────────────────────────────────────── */
+@keyframes perimeterTravel {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -100;
+  }
+}
+
+.perimeter-travel-active {
+  stroke-dasharray: 22 78;
+  animation: perimeterTravel 0.95s linear infinite;
+}
+
+/* Inner card icon subtle scale (scale 1.05) */
+.inner-icon {
+  color: #B8B8B8;
+  transition: all 180ms ease-out;
+}
+
+.card-inner:hover .inner-icon,
+.inner-icon:hover {
+  color: #FFFFFF;
+  transform: scale(1.05);
+}
+
+/* ─── BUTTONS ──────────────────────────────────────────────────────
+ * Primary buttons:
+ * Background: #BFC3C7
+ * Text: #000000
+ * Hover: #FFFFFF with dark text #000000, slight lift, subtle shadow
+ *
+ * Secondary buttons:
+ * Transparent black background, white/grey border, #FFC6A8 or white text
+ * On hover: slightly lighter background, white border, subtle lift
+ * Transition: 150-200ms ease-out
+ ─────────────────────────────────────────────────────────────────── */
+.btn-primary {
+  background-color: #BFC3C7;
+  color: #000000;
+  font-weight: 600;
+  border: 1px solid #BFC3C7;
+  box-shadow: 0 2px 10px rgba(191, 195, 199, 0.25);
+  transition: all 180ms ease-out;
+  cursor: pointer;
+}
+
+.btn-primary svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+  stroke-width: 2.2px;
+}
+
+.btn-primary:hover {
+  background-color: #FFFFFF;
+  border-color: #FFFFFF;
+  color: #000000;
+  box-shadow: 0 4px 18px rgba(255, 255, 255, 0.35);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn-primary:hover svg {
+  color: #000000 !important;
+  stroke: #000000 !important;
+}
+
+.music-play-btn {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+}
+
+.music-play-btn svg {
+  color: #000000 !important;
+  fill: #000000 !important;
+  stroke: #000000 !important;
+}
+
+.music-play-btn:hover {
+  background-color: #E2E5E8 !important;
+}
+
+.btn-secondary {
+  background: rgba(0, 0, 0, 0.6);
+  color: #F2F2F2;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  transition: all 180ms ease-out;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: #252525;
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.45);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+/* ─── Stagger Reveal Helper ──────────────────────────────────────── */
+.stagger-1 { transition-delay: 0ms; }
+.stagger-2 { transition-delay: 90ms; }
+.stagger-3 { transition-delay: 180ms; }
+.stagger-4 { transition-delay: 270ms; }
+.stagger-5 { transition-delay: 360ms; }
+.stagger-6 { transition-delay: 450ms; }
+
+/* ─── Equalizer Animation ────────────────────────────────────────── */
+@keyframes eq-dance {
+  0%, 100% { height: 25%; }
+  50%       { height: 95%; }
+}
+
+.eq-bar {
+  animation: eq-dance var(--dur, 0.8s) ease-in-out infinite;
+}
+
+/* ─── Developer Workspace Heatmap ───────────────────────────────── */
+.heatmap-scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.heat-0 { background-color: #101612; border: 1px solid rgba(139, 148, 142, 0.18); }
+.heat-1 { background-color: #0E4429; }
+.heat-2 { background-color: #006D32; }
+.heat-3 { background-color: #26A641; }
+.heat-4 { background-color: #39D353; box-shadow: 0 0 5px rgba(57, 211, 83, 0.28); }
+
+.section-separator-line {
+  background: #8F1D2C;
+  box-shadow: 0 0 8px rgba(143, 29, 44, 0.18);
+}
+
+.section-separator-dot {
+  background: #8F1D2C;
+  box-shadow: 0 0 8px rgba(143, 29, 44, 0.22);
+  outline: 2px solid rgba(143, 29, 44, 0.18);
+  outline-offset: 2px;
+}
+
+.music-progress {
+  accent-color: #C8C8C8;
+  min-width: 0;
+  cursor: pointer;
+}
+
+/* Monochrome normalization for legacy utility classes used across sections. */
+[class*="text-[#B21F3D]"],
+[class*="text-[#007df9]"],
+[class*="text-[#03f032]"],
+[class*="text-[#0df205]"] {
+  color: #C8C8C8 !important;
+}
+
+[class*="bg-[#B21F3D]"],
+[class*="bg-[#007df9]"],
+[class*="bg-[#03f032]"],
+[class*="bg-[#0df205]"] {
+  background-color: #242424 !important;
+}
+
+[class*="border-[#B21F3D]"],
+[class*="ring-[rgba(178,31,61"],
+[class*="178,31,61"] {
+  border-color: #444444 !important;
+  box-shadow: 0 0 10px rgba(200, 200, 200, 0.06) !important;
+}
+
+[class*="text-[#B21F3D]"]:hover,
+[class*="text-[#007df9]"]:hover,
+[class*="text-[#03f032]"]:hover,
+[class*="text-[#0df205]"]:hover {
+  color: #FFFFFF !important;
+}
+
+[class*="bg-[#B21F3D]"]:hover,
+[class*="bg-[#007df9]"]:hover,
+[class*="bg-[#03f032]"]:hover,
+[class*="bg-[#0df205]"]:hover {
+  border-color: #AAAAAA !important;
+  background-color: #242424 !important;
+}
+
+.card-outer,
+.card-inner,
+.glass,
+.developer-sub-card {
+  border-color: #303030;
+}
+
+.card-outer,
+.card-inner,
+.glass {
+  box-shadow: 0 16px 40px -10px rgba(0, 0, 0, 0.9), 0 0 20px -5px rgba(255, 255, 255, 0.03);
+}
+
+/* ─── ENHANCED TEXT READABILITY ────────────────────────────────────
+ * Improves contrast of secondary and muted text on dark-gray surfaces
+ ─────────────────────────────────────────────────────────────────── */
+.text-muted,
+[class*="text-[#888888]"],
+[class*="text-[#858585]"],
+[class*="text-[#8A8F94]"],
+[class*="text-[#909090]"] {
+  color: #A3A3A3;
+}
+
+[class*="text-[#888888]"]:hover,
+[class*="text-[#858585]"]:hover {
+  color: #F0F0F0;
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .ambient-surface::before,
+  .ambient-surface::after {
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .ambient-surface::after {
+    width: 18rem;
+    height: 12rem;
+  }
+
+  #internship .card-outer {
+    border-radius: 1rem;
+  }
+
+  #internship .card-outer > .grid {
+    min-width: 0;
+  }
+}
