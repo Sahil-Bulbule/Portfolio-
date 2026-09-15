@@ -7,7 +7,7 @@ A cinematic, scroll-driven personal portfolio built with React 18, Vite, Tailwin
 ```bash
 npm install
 npm run dev
-```
+``` 
 
 Then open the local URL Vite prints (usually http://localhost:5173). 
 
