@@ -13,7 +13,7 @@ Then open the local URL Vite prints (usually http://localhost:5173).
 
 To build for production:
 
-```bash
+```bash 
 npm run build
 ```
 
