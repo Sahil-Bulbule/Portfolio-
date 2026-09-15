@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-Then open the local URL Vite prints (usually http://localhost:5173).
+Then open the local URL Vite prints (usually http://localhost:5173). 
 
 To build for production:
 
