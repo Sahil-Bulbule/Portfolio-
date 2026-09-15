@@ -5,7 +5,7 @@ A cinematic, scroll-driven personal portfolio built with React 18, Vite, Tailwin
 ## Run it
 
 ```bash
-npm install
+npm install 
 npm run dev
 ``` 
 
