@@ -121,17 +121,17 @@ export default function AIAssistant() {
   return (
     <section id="ai-assistant" className="relative py-10 sm:py-14 overflow-hidden">
       <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-8 relative z-10 flex justify-center">
-        <div className="w-full lg:w-[86%] xl:w-[82%] card-outer p-4 sm:p-6">
-          <AnimatedBorderCard className="p-4 sm:p-6 flex flex-col h-[600px] max-h-[calc(100vh-3rem)] min-h-[500px]">
-            <div className="flex items-center justify-between pb-4 mb-4 border-b border-[#2A2A2A] gap-3">
+        <div className="w-full max-w-full lg:w-[86%] xl:w-[82%] card-outer p-3 sm:p-6">
+          <AnimatedBorderCard className="p-3 sm:p-6 flex flex-col h-[calc(100svh-3rem)] min-h-[560px] sm:h-[600px] sm:max-h-[calc(100vh-3rem)] sm:min-h-[500px]">
+            <div className="flex flex-col items-stretch justify-between pb-4 mb-4 border-b border-[#2A2A2A] gap-4 sm:flex-row sm:items-center sm:gap-3">
               <div className="flex items-center gap-2.5 min-w-0">
                 <div className="p-2 rounded-xl bg-[#202020] border border-[#383838] text-[#D0D0D0] shrink-0"><Bot size={18} /></div>
                 <div className="min-w-0">
                   <h3 className="font-display font-bold text-sm sm:text-base text-[#F5F5F5] flex items-center gap-2 flex-wrap"><span>SAHIL&apos;S AI Assistant</span><span className="text-[10px] font-mono text-[#CFCFCF] bg-white/5 border border-[#2A2A2A] px-2 py-0.5 rounded-full">v2.0</span></h3>
-                  <p className="text-[11px] font-mono text-[#CFCFCF] truncate">Instant Q&amp;A on skills, projects &amp; engineering milestones</p>
+                  <p className="text-[11px] font-mono text-[#CFCFCF] break-words sm:truncate">Instant Q&amp;A on skills, projects &amp; engineering milestones</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
+              <div className="flex items-center justify-between gap-2 shrink-0 sm:justify-end">
                 <button type="button" onClick={clearChat} className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-[#111111] border border-[#303030] text-[10px] font-mono text-[#A6A6A6] hover:text-white hover:border-[#888888] transition-colors cursor-pointer" aria-label="Clear chat">
                   <Trash2 size={12} />
                   <span>Clear Chat</span>
@@ -140,28 +140,28 @@ export default function AIAssistant() {
               </div>
             </div>
 
-            <div className="flex items-center gap-2 mb-4 min-w-0">
+            <div className="flex flex-col items-stretch gap-2 mb-4 min-w-0 sm:flex-row sm:items-center">
               <span className="text-[10px] font-mono text-[#CFCFCF] uppercase tracking-wider shrink-0">Quick Questions</span>
-              <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-thin">
-                {quickQueries.map((query) => <button key={query} type="button" onClick={() => handleSend(query)} className="text-[11px] font-mono px-3 py-1.5 rounded-lg bg-[#202020] border border-[#383838] text-[#B8B8B8] hover:text-[#E8E8E8] hover:border-[#5A5A5A] whitespace-nowrap transition-colors cursor-pointer">{query}</button>)}
+              <div className="flex flex-col gap-1 overflow-y-auto max-h-32 pb-1 sm:flex-row sm:gap-2 sm:overflow-x-auto sm:overflow-y-hidden scrollbar-thin">
+                {quickQueries.map((query) => <button key={query} type="button" onClick={() => handleSend(query)} className="w-full max-w-full text-left text-[10px] font-mono px-2 py-1 rounded-lg bg-[#202020] border border-[#383838] text-[#B8B8B8] hover:text-[#E8E8E8] hover:border-[#5A5A5A] whitespace-nowrap transition-colors cursor-pointer sm:w-auto sm:px-3 sm:py-1.5 sm:text-[11px]">{query}</button>)}
               </div>
             </div>
 
-            <div ref={messagesContainerRef} className="flex-1 min-h-0 overflow-y-auto space-y-4 pr-1 sm:pr-2 font-body text-xs leading-relaxed bg-[#181818] p-3 sm:p-5 rounded-xl border border-[#2A2A2A]">
+            <div ref={messagesContainerRef} className="flex-1 min-h-0 overflow-y-auto space-y-4 pr-1 sm:pr-2 font-body text-xs leading-relaxed bg-[#181818] p-3 sm:p-5 rounded-xl border border-[#2A2A2A] break-words">
               {messages.map((message) => {
                 const isAI = message.sender === "ai";
                 return <div key={message.id} className={`flex items-start gap-2.5 ${isAI ? "justify-start" : "justify-end"}`}>
                   {isAI && <div className="shrink-0 w-6 h-6 rounded-full bg-[#202020] border border-[#383838] flex items-center justify-center text-[#D0D0D0] text-[9px] font-mono">AI</div>}
-                  <div className={`max-w-[92%] sm:max-w-[76%] px-3.5 py-2.5 rounded-2xl whitespace-pre-wrap ${isAI ? "bg-[#1C1C1C] text-[#F5F5F5] border border-[#2A2A2A] rounded-tl-sm" : "bg-[#252525] text-[#F5F5F5] border border-white/10 rounded-tr-sm"}`}>{isAI ? <RichText text={message.text} /> : message.text}</div>
+                  <div className={`max-w-[92%] sm:max-w-[76%] min-w-0 px-3.5 py-2.5 rounded-2xl whitespace-pre-wrap break-words ${isAI ? "bg-[#1C1C1C] text-[#F5F5F5] border border-[#2A2A2A] rounded-tl-sm" : "bg-[#252525] text-[#F5F5F5] border border-white/10 rounded-tr-sm"}`}>{isAI ? <RichText text={message.text} /> : message.text}</div>
                 </div>;
               })}
               {isTyping && <div className="flex items-center gap-2.5 text-[10px] font-mono text-[#CFCFCF]"><div className="shrink-0 w-6 h-6 rounded-full bg-[#202020] border border-[#383838] flex items-center justify-center text-[#D0D0D0]">AI</div><span>Typing...</span></div>}
               <div ref={messagesEndRef} />
             </div>
 
-            <form onSubmit={(event) => { event.preventDefault(); handleSend(); }} className="mt-4 flex items-end gap-2 rounded-xl border border-[#2A2A2A] bg-[#181818] p-2 focus-within:border-[#666666] transition-colors">
-              <textarea value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={handleInputKeyDown} placeholder="Ask about Sahil's skills, projects, education, AI journey..." rows={1} className="flex-1 max-h-24 resize-none bg-transparent px-2 py-1.5 text-xs font-mono text-[#F5F5F5] outline-none placeholder-[#CFCFCF]/60" aria-label="Ask Sahil's AI Assistant" />
-              <button type="submit" aria-label="Send message" disabled={isTyping || !input.trim()} className="p-2.5 rounded-lg bg-[#D0D0D0] text-[#111111] hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer shrink-0"><Send size={15} /></button>
+            <form onSubmit={(event) => { event.preventDefault(); handleSend(); }} className="mt-4 flex w-full max-w-full items-end gap-1 rounded-xl border border-[#2A2A2A] bg-[#181818] p-1.5 focus-within:border-[#666666] transition-colors sm:gap-2 sm:p-2">
+              <textarea value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={handleInputKeyDown} placeholder="Ask about Sahil's skills, projects, education, AI journey..." rows={1} className="min-w-0 max-w-full flex-1 resize-none overflow-hidden whitespace-nowrap bg-transparent px-1 py-1 text-[11px] font-mono text-[#F5F5F5] outline-none placeholder-[#CFCFCF]/60 sm:max-h-24 sm:overflow-auto sm:px-2 sm:py-1.5 sm:text-xs" aria-label="Ask Sahil's AI Assistant" />
+              <button type="submit" aria-label="Send message" disabled={isTyping || !input.trim()} className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[#D0D0D0] p-0 text-[#111111] hover:bg-white disabled:opacity-40 disabled:cursor-not-allowed transition-colors cursor-pointer sm:h-auto sm:w-auto sm:p-2.5"><Send size={15} /></button>
             </form>
           </AnimatedBorderCard>
         </div>

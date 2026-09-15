@@ -33,7 +33,7 @@ export default function Footer() {
               href="#home"
               className="font-display text-lg font-bold tracking-tight text-white hover:text-[#BFC3C7] transition-colors duration-180 ease-out"
             >
-              Sahil Bulbule<span className="text-[#BFC3C7] font-mono text-xs ml-1">.ai</span>
+              Sahil Bulbule<span className="text-[#BFC3C7] font-mono text-xs ml-1">.me</span>
             </a>
             <p className="text-xs text-[#858585] mt-1 font-mono">
               AI/ML Engineer - Python Full Stack Developer - YCCE Nagpur
@@ -84,7 +84,7 @@ export default function Footer() {
               <SiLeetcode size={15} />
             </a>
             <a
-              href="mailto:sahilbulbule@gmail.com"
+              href="mailto:sahilbulbule16@gmail.com"
               aria-label="Email"
               className="p-2 rounded-xl bg-[#121212] border border-[rgba(191,195,199,0.12)] text-[#858585] hover:text-[#BFC3C7] hover:border-[#666666] hover:scale-105 transition-all duration-180 ease-out"
             >
@@ -104,9 +104,12 @@ export default function Footer() {
 
         {/* Bottom Credits & Milestones */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-[11px] font-mono text-[#858585] gap-3">
-          <p>Copyright 2026 Sahil Bulbule. Engineered with React &amp; Tailwind CSS.</p>
+          <p>
+            © 2026 Sahil Bulbule. Turning ideas into intelligent solutions.
+          </p>
+
           <p className="text-[#D0D0D0]">
-            Institutional Rank #2 (86.23%) - B.Tech CSE @ YCCE Nagpur
+            AI/ML • GenAI • Python Full Stack • YCCE Nagpur
           </p>
         </div>
       </div>

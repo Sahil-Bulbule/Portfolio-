@@ -61,15 +61,15 @@ export default function ExperienceEducation() {
   const [showCertModal, setShowCertModal] = useState(false);
 
   return (
-    <section id="experience" className="relative py-28 bg-ink overflow-hidden">
+    <section id="experience" className="relative py-16 sm:py-20 lg:py-28 bg-ink overflow-hidden">
       {/* Radial glow background */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none" />
-      <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] rounded-full bg-[#1C1C1C] blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/3 w-[450px] h-[450px] rounded-full bg-electric/10 blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/3 w-[80vw] h-[80vw] max-w-[500px] max-h-[500px] rounded-full bg-[#1C1C1C] blur-[100px] lg:blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/3 w-[75vw] h-[75vw] max-w-[450px] max-h-[450px] rounded-full bg-electric/10 blur-[100px] lg:blur-[140px] pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto px-6 sm:px-8">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -93,11 +93,11 @@ export default function ExperienceEducation() {
         </div>
 
         {/* Tab switcher */}
-        <div className="flex justify-center mb-14">
-          <div className="glass p-1.5 rounded-full border border-white/12 flex items-center gap-2">
+        <div className="flex justify-center mb-10 sm:mb-14">
+          <div className="glass w-full sm:w-auto p-1.5 rounded-2xl sm:rounded-full border border-white/12 flex flex-wrap items-center justify-center gap-1 sm:gap-2">
             <button
               onClick={() => setActiveTab("all")}
-              className={`px-5 py-2 rounded-full text-xs font-medium transition-all ${
+              className={`flex-1 sm:flex-none px-3 sm:px-5 py-2 rounded-xl sm:rounded-full text-xs font-medium transition-all ${
                 activeTab === "all"
                   ? "bg-gradient-to-r from-[#BFC3C7] to-[#BFC3C7] text-ink font-semibold shadow-lg"
                   : "text-white/60 hover:text-white"
@@ -107,7 +107,7 @@ export default function ExperienceEducation() {
             </button>
             <button
               onClick={() => setActiveTab("experience")}
-              className={`px-5 py-2 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`flex-1 sm:flex-none justify-center px-3 sm:px-5 py-2 rounded-xl sm:rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
                 activeTab === "experience"
                   ? "bg-gradient-to-r from-[#BFC3C7] to-[#BFC3C7] text-ink font-semibold shadow-lg"
                   : "text-white/60 hover:text-white"
@@ -117,7 +117,7 @@ export default function ExperienceEducation() {
             </button>
             <button
               onClick={() => setActiveTab("education")}
-              className={`px-5 py-2 rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
+              className={`flex-1 sm:flex-none justify-center px-3 sm:px-5 py-2 rounded-xl sm:rounded-full text-xs font-medium transition-all flex items-center gap-1.5 ${
                 activeTab === "education"
                   ? "bg-gradient-to-r from-[#BFC3C7] to-[#BFC3C7] text-ink font-semibold shadow-lg"
                   : "text-white/60 hover:text-white"
@@ -245,7 +245,7 @@ export default function ExperienceEducation() {
           </div>
 
           {/* Experience Graphic Card Column */}
-          <div className="lg:col-span-5 space-y-6 sticky top-28">
+          <div className="lg:col-span-5 space-y-6 lg:sticky lg:top-28">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}

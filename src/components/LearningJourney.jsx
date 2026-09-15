@@ -33,14 +33,14 @@ const focusAreas = [
 
 export default function LearningJourney() {
   return (
-    <section id="learning" className="relative py-28 bg-ink overflow-hidden">
+    <section id="learning" className="relative py-16 sm:py-20 lg:py-28 bg-ink overflow-hidden">
       {/* Background glowing atmospheres */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[350px] rounded-full bg-[#1C1C1C] blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[85vw] h-[50vw] max-w-[600px] max-h-[350px] rounded-full bg-[#1C1C1C] blur-[100px] lg:blur-[160px] pointer-events-none" />
 
-      <div className="relative max-w-6xl mx-auto px-6 sm:px-8">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -67,7 +67,7 @@ export default function LearningJourney() {
         </div>
 
         {/* Roadmap Nodes Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 mb-12 sm:mb-20">
           {roadmapNodes.map((node, i) => (
             <motion.div
               key={node.step}

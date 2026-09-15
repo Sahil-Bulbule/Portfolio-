@@ -319,10 +319,10 @@ export default function BentoDeveloperHub() {
         </div>
 
         {/* ONE LARGE MAIN CARD */}
-        <div className="card-outer p-6 sm:p-8 lg:p-10 space-y-6">
+        <div className="card-outer w-full max-w-full p-4 sm:p-8 lg:p-10 space-y-6">
 
           {/* Module Header */}
-          <div className="flex flex-wrap items-center justify-between bg-transparent pb-4 border-b border-[#303030] gap-3">
+          <div className="flex flex-col items-start justify-between bg-transparent pb-4 border-b border-[#303030] gap-3 lg:flex-row lg:items-center">
             <div className="flex items-center gap-2.5">
               <span className="w-2.5 h-2.5 rounded-full bg-[#C8C8C8] shadow-[0_0_8px_rgba(200,200,200,0.16)]" />
               <h3 className="font-display font-bold text-base sm:text-lg text-white hover:text-[#BFC3C7] transition-colors duration-180 ease-out">
@@ -338,14 +338,14 @@ export default function BentoDeveloperHub() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
 
             {/* Interactive Terminal */}
-            <div className="card-inner flex flex-col overflow-hidden min-w-0">
+            <div className="card-inner flex min-w-0 max-w-full flex-col overflow-hidden">
               {/* Terminal Window Header */}
-              <div className="px-4 py-2.5 bg-[#1A1A1A] border-b border-[#303030] flex items-center justify-between">
-                <div className="flex items-center gap-2">
+              <div className="flex flex-wrap items-center justify-between gap-2 px-3 py-2.5 bg-[#1A1A1A] border-b border-[#303030] sm:px-4">
+                <div className="flex min-w-0 items-center gap-2">
                   <span className="w-3 h-3 rounded-full bg-[#C8C8C8] opacity-80" />
                   <span className="w-3 h-3 rounded-full bg-[#909090] opacity-70" />
                   <span className="w-3 h-3 rounded-full bg-[#686868] opacity-70" />
-                  <span className="ml-2 font-mono text-xs text-[#A3A3A3]">
+                  <span className="ml-1 truncate font-mono text-xs text-[#A3A3A3] sm:ml-2">
                     sahil_terminal - bash
                   </span>
                 </div>
@@ -357,16 +357,16 @@ export default function BentoDeveloperHub() {
               {/* Terminal Output */}
               <div
                 ref={termContainerRef}
-                className="flex-1 p-4 font-mono text-xs text-[#D0D0D0] min-h-[220px] max-h-[260px] overflow-y-auto space-y-1.5 leading-relaxed bg-[#141414]"
+                className="flex-1 min-w-0 p-3 font-mono text-[11px] text-[#D0D0D0] min-h-[220px] max-h-[260px] overflow-y-auto space-y-1.5 leading-relaxed break-words bg-[#141414] sm:p-4 sm:text-xs"
               >
                 {termHistory.map((item, idx) => (
                   <div
                     key={idx}
                     className={
                       item.type === "cmd"
-                        ? "text-[#BFC3C7] font-bold"
+                          ? "text-[#BFC3C7] font-bold break-words"
                         : item.type === "sys"
-                          ? "text-[#A3A3A3]"
+                          ? "text-[#A3A3A3] whitespace-pre-wrap break-words"
                           : item.type === "error"
                             ? "text-[#BFC3C7] whitespace-pre-wrap"
                             : "text-[#D0D0D0] whitespace-pre-wrap"
@@ -379,7 +379,7 @@ export default function BentoDeveloperHub() {
 
               {/* Terminal Input */}
               <form onSubmit={submitCommand} className="relative border-t border-[#303030] bg-[#1A1A1A]">
-                <span className="absolute left-4 top-1/2 -translate-y-1/2 font-mono text-xs text-[#BFC3C7] font-bold select-none">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 font-mono text-[10px] text-[#BFC3C7] font-bold select-none sm:left-4 sm:text-xs">
                   sahil@hub:~$
                 </span>
                 <input
@@ -387,7 +387,7 @@ export default function BentoDeveloperHub() {
                   value={termInput}
                   onChange={(e) => setTermInput(e.target.value)}
                   placeholder="Type 'help' to explore..."
-                  className="w-full bg-transparent pl-[116px] pr-4 py-3 text-xs font-mono text-white outline-none placeholder-[#858585]"
+                  className="w-full min-w-0 bg-transparent pl-[82px] pr-3 py-3 text-[11px] font-mono text-white outline-none placeholder-[#858585] sm:pl-[116px] sm:pr-4 sm:text-xs"
                 />
               </form>
             </div>
@@ -395,8 +395,8 @@ export default function BentoDeveloperHub() {
             {/* DSA & LeetCode Journey Card */}
             <div className="card-inner p-5 sm:p-6 flex flex-col justify-between min-w-0">
               <div>
-                <div className="flex items-center justify-between pb-3 border-b border-[#303030] mb-4">
-                  <div className="flex items-center gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-[#303030] mb-4">
+                  <div className="flex min-w-0 items-center gap-2">
                     <Flame size={18} className="text-[#D0D0D0]" />
                     <h4 className="font-display font-bold text-sm sm:text-base text-white">
                       DSA &amp; LeetCode Journey
@@ -502,7 +502,7 @@ export default function BentoDeveloperHub() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-[#B21F3D]/20 flex items-center justify-between text-xs font-mono text-[#858585]">
+              <div className="flex flex-col items-start gap-2 pt-3 border-t border-[#B21F3D]/20 text-xs font-mono text-[#858585] sm:flex-row sm:items-center sm:justify-between">
                 <span>
                   <strong className="text-[#D0D0D0]">GitHub Activity</strong>
                 </span>
@@ -633,7 +633,7 @@ export default function BentoDeveloperHub() {
                 <div className="flex items-center justify-between gap-3">
                   <button
                     onClick={togglePlayback}
-                    className="music-play-btn w-9 h-9 rounded-xl bg-white text-black hover:bg-[#E5E5E5] transition-all duration-180 ease-out cursor-pointer shrink-0 shadow-md hover:scale-105 active:scale-95 flex items-center justify-center !text-black !bg-white"
+                    className="music-play-btn w-9 h-9 rounded-xl bg-white text-black hover:bg-[#E5E5E5] transition-all duration-180 ease-out cursor-pointer shrink-0 shadow-md hover:scale-105 active:scale-95 flex items-center justify-center"
                     aria-label={isPlaying ? "Pause track" : "Play track"}
                     disabled={audioStatus === "loading"}
                   >
