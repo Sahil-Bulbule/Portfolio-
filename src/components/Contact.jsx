@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import emailjs from "@emailjs/browser";
 import {
@@ -296,8 +296,9 @@ export default function Contact() {
 
                   <AnimatedBorderCard
                     as="a"
-                    href="/resume/Sahil-Bulbule-Resume.pdf"
-                    download
+                    href="https://github.com/Sahil-Bulbule"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="p-4 flex flex-col justify-between group cursor-pointer"
                   >
                     <div className="flex items-center justify-between mb-2">
