@@ -329,7 +329,7 @@ export default function Contact() {
                   </div>
 
                   <a
-                    href="/images/Resume/resume.pdf"
+                    href="/images/Resume/MyResume.pdf"
                     target="_blank"
                     rel="noreferrer"
                     className="btn-secondary px-3 py-1.5 rounded-lg text-xs font-mono font-semibold inline-flex items-center gap-1"

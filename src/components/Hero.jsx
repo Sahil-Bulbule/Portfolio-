@@ -162,7 +162,7 @@ export default function Hero() {
                   <ArrowRight size={13} />
                 </a>
                 <a
-                  href="/images/Resume/resume.pdf"
+                  href="/images/Resume/MyResume.pdf"
                   download
                   className="btn-secondary px-4 py-2 rounded-xl text-sm font-mono flex items-center justify-center gap-1 min-h-10"
                 >
